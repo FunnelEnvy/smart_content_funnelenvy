@@ -1,0 +1,8 @@
+condition.funnelenvy:
+  header: true
+  version: 1.x
+  js:
+    js/condition.funnelenvy.js: { }
+  dependencies:
+    - smart_content/storage
+    - smart_content/condition_type.standard

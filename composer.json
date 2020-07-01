@@ -1,0 +1,24 @@
+{
+  "name": "drupal/smart_content_funnelenvy",
+  "type": "drupal-module",
+  "description": "Provides Funnelenvy integration for the Smart Content module for Drupal",
+  "keywords": ["Drupal"],
+  "license": "GPL-3.0-or-later",
+  "homepage": "https://www.drupal.org/project/smart_content_funnelenvy",
+  "authors": [
+    {
+      "name": "Subhash Dogra",
+      "role": "Maintainer"
+    },
+    {
+      "name": "Deepak singh Dhanik",
+      "role": "Maintainer"
+    }
+  ],
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/smart_content_funnelenvy",
+    "source": "http://cgit.drupalcode.org/smart_content_funnelenvy"
+  },
+  "require": {}
+}

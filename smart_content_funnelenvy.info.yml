@@ -1,0 +1,7 @@
+name: 'Smart Content Funnelenvy'
+type: module
+description: 'Provides Funnelenvy integration for Smart Content.'
+core_version_requirement: ^8 || ^9
+package: 'Smart Content'
+dependencies:
+  - smart_content:smart_content
