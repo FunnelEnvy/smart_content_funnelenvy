@@ -27,16 +27,16 @@
   Drupal.smartContent.plugin.Field['funnelenvy'] = function (condition) {
     let key = condition.field.pluginId.split(':')[1];
         Drupal.smartContent.funnelenvy = new Promise((resolve, reject) => {
-          Promise.resolve(Drupal.smartContent.waitForFunnelenvy).then(function(Funnelenvy){
-            if(Funnelenvy){
+          Promise.resolve(Drupal.smartContent.waitForFunnelenvy).then(function(funnelEnvy){
+            if(funnelEnvy){
               if(key === 'variationSlug'){
-                Funnelenvy.addListener('backstage.activeVariation', function(model, message) {
+                funnelEnvy.addListener('backstage.activeVariation', function(model, message) {
                   if((model && model.event) === 'backstage.activeVariation'){
                     resolve(model.backstage.activeVariation)
                   }
                 });
               }else{
-                Funnelenvy.addListener('backstage.updatedAudiences', function(model, message) {
+                funnelEnvy.addListener('backstage.updatedAudiences', function(model, message) {
                   if((model && model.event) === 'backstage.updatedAudiences'){
                     resolve(model.backstage.audiences[condition.settings.value])
                   }
