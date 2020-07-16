@@ -12,7 +12,7 @@
             if (attempts < 200) {
               if (window.funnelEnvy && typeof window.funnelEnvy.on === 'function') {
                 clearInterval(interval);
-                resolve(true);
+                resolve(window.funnelEnvy);
               }
             }
             else {
@@ -23,31 +23,44 @@
           }, 20);
   })
 
-  // execute condition
+  /**
+ * Function to return a value recived from Funnelenvy condition selected
+ * @return Promise
+ *   An array of fields from Funnelenvy.
+ */
   Drupal.smartContent.plugin.Field['funnelenvy'] = function (condition) {
     let key = condition.field.pluginId.split(':')[1];
         Drupal.smartContent.funnelenvy = new Promise((resolve, reject) => {
-          Promise.resolve(Drupal.smartContent.waitForFunnelenvy).then(function(isFeAvailable){
-            if(isFeAvailable){
+          Promise.resolve(Drupal.smartContent.waitForFunnelenvy).then(function(funnelEnvy){
+            if(funnelEnvy){
               if(key === 'variationSlug'){
-                window.funnelEnvy.addListener('backstage.activeVariation', function(model, message) {
+                funnelEnvy.addListener('backstage.activeVariation', function(model, message) {
                   if((model && model.event) === 'backstage.activeVariation'){
                     resolve(model.backstage.activeVariation)
                   }
                 });
               }else{
-                window.funnelEnvy.addListener('backstage.updatedAudiences', function(model, message) {
+                funnelEnvy.addListener('backstage.updatedAudiences', function(model, message) {
                   if((model && model.event) === 'backstage.updatedAudiences'){
                     resolve(model.backstage.audiences[condition.settings.value])
                   }
                 });
-              } 
+              }
+              
+              // Resolve the segement if non of the above listener get fired
+              funnelEnvy.addListener('backstage.updatedAccountData',function(model,message) {
+                if((model && model.event) === 'backstage.updatedAccountData'){
+                  resolve(false)
+                }
+              })
+
             }else{
               resolve(false);
             }
           })
         });
 
+    // resolve with value recieved from listener so smart_content can evaluate wheather it is true of not
     return Promise.resolve(Drupal.smartContent.funnelenvy).then( (value) => {
       if(value && value.hasOwnProperty(key)) {
         return value[key];
