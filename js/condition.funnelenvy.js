@@ -26,7 +26,6 @@
   /**
  * Function to return a value recived from Funnelenvy condition selected
  * @return Promise
- *   An array of fields from Funnelenvy.
  */
   Drupal.smartContent.plugin.Field['funnelenvy'] = function (condition) {
     let key = condition.field.pluginId.split(':')[1];
