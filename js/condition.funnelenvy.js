@@ -30,12 +30,13 @@
  */
   Drupal.smartContent.plugin.Field['funnelenvy'] = function (condition) {
     let key = condition.field.pluginId.split(':')[1];
+    let value = condition.settings.value;
         Drupal.smartContent.funnelenvy = new Promise((resolve, reject) => {
           Promise.resolve(Drupal.smartContent.waitForFunnelenvy).then(function(funnelEnvy){
             if(funnelEnvy){
               if(key === 'variationSlug'){
                 funnelEnvy.addListener('backstage.activeVariation', function(model, message) {
-                  if((model && model.event) === 'backstage.activeVariation'){
+                  if((model && model.event) === 'backstage.activeVariation' && model.backstage.activeVariation[key].indexOf(value) > -1 ){
                     resolve(model.backstage.activeVariation)
                   }
                 });
