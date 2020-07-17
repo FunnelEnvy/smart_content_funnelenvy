@@ -66,10 +66,12 @@ class FunnelenvyConditionDeriver extends DeriverBase implements ContainerDeriver
       'variationSlug' => [
         'label' => 'Variation',
         'type'  => 'textfield',
+        'unique' => true,
       ],
       'slug' => [
         'label' => 'Audience',
         'type'  => 'textfield',
+        'unique' => true,
       ],
     ];
   }
