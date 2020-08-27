@@ -39,15 +39,24 @@
                     resolve(model.backstage.activeVariation)
                   }
                 });
-              }else{
+              }else if(key === 'slug'){
                 funnelEnvy.addListener('backstage.updatedAudiences', function(model, message) {
                   if((model && model.event) === 'backstage.updatedAudiences'){
                     resolve(model.backstage.audiences[condition.settings.value])
                   }
                 });
+              }else{
+                resolve(false)
               }
               
-              // Resolve the segement if non of the above listener get fired
+              // resolve after 4 second if non of campaign and audience are there in non configured domain
+              setTimeout(function(){
+                if(funnelEnvy.userConfig.organizationData.pdcampaigns.length < 1 && funnelEnvy.userConfig.organizationData.conditions.length < 1){
+                  resolve(false)
+                }
+              },4000)
+
+              // Resolve the segement if non of the above listener get fired if Domain Configured
               funnelEnvy.addListener('backstage.updatedAccountData',function(model,message) {
                 if((model && model.event) === 'backstage.updatedAccountData'){
                   resolve(false)
