@@ -49,7 +49,7 @@
                 resolve(false)
               }
               
-              // resolve after 4 second if non of campaign and audience are there in non configured domain
+              // resolve false if domain is not added in Funnelenvy Backend
               setTimeout(function(){
                 if(funnelEnvy.userConfig.organizationData.pdcampaigns.length < 1 && funnelEnvy.userConfig.organizationData.conditions.length < 1){
                   resolve(false)
