@@ -51,9 +51,7 @@
               
               // resolve false if domain is not added in Funnelenvy Backend
               setTimeout(function(){
-                if(funnelEnvy.userConfig.organizationData.pdcampaigns.length < 1 && funnelEnvy.userConfig.organizationData.conditions.length < 1){
                   resolve(false)
-                }
               },4000)
 
               // Resolve the segement if non of the above listener get fired if Domain Configured
